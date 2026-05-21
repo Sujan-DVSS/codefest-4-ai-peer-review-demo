@@ -16,5 +16,5 @@ jobs:
       LITELLM_API_KEY: ${{ secrets.LITELLM_API_KEY }}
     with:
       stories-dir: stories
-      fail-on: high
+      fail-on: medium
       llm-provider: auto
