@@ -16,6 +16,7 @@ export class DiscountService {
    * Registry of active promotional codes and their fractional discount rates.
    * In production this would be fetched from a promotions DB with expiry dates.
    */
+  
   private static readonly PROMO_CODES: Record<string, number> = {
     SUMMER20: 0.20,
     LOYALTY10: 0.10,
