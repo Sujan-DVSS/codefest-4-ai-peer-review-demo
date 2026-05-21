@@ -52,10 +52,6 @@ export class DiscountService {
    */
   enforceDiscountCap(discountAmount: number): number {
     const cappedDiscount = Math.min(discountAmount, DiscountService.MAX_DISCOUNT_AMOUNT);
-
-    // BUG: cappedDiscount is computed correctly above, but the uncapped
-    // discountAmount is returned here instead, so the $200 ceiling is never
-    // actually enforced on the final price.
-    return discountAmount;
+    return cappedDiscount;
   }
 }
