@@ -1,4 +1,4 @@
-name: AI Context PR Review
+name: ReviewIQ
 
 on:
   pull_request:
