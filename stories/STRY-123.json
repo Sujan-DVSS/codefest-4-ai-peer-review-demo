@@ -1,0 +1,84 @@
+{
+  "id": "STRY-123",
+  "title": "Cap loyalty discount for hotel booking price quotes",
+  "description": "As a hotel guest, I want loyalty and promotional discounts to be capped during price quote calculation so that displayed booking totals are accurate and revenue rules are protected.",
+  "inScopePaths": [
+    "src/services/PricingService.ts",
+    "src/services/DiscountService.ts",
+    "src/services/LoyaltyService.ts",
+    "src/interfaces/**",
+    "test/**",
+    "tests/**",
+    "src/**/*.test.ts"
+  ],
+  "acceptanceCriteria": [
+    {
+      "id": "AC1",
+      "text": "When a loyalty member applies a promotional discount, the total discount must not exceed 30 percent of the nightly base price.",
+      "keywords": [
+        "loyalty",
+        "promotional discount",
+        "30",
+        "cap",
+        "nightly base price"
+      ],
+      "mustTouch": [
+        "src/services/PricingService.ts",
+        "src/services/DiscountService.ts"
+      ],
+      "risk": "high"
+    },
+    {
+      "id": "AC2",
+      "text": "The booking price quote should include the final total, applied discount amount, and a discount reason when a cap is applied.",
+      "keywords": [
+        "price quote",
+        "final total",
+        "discount amount",
+        "discount reason",
+        "cap"
+      ],
+      "mustTouch": [
+        "src/services/PricingService.ts",
+        "src/interfaces/**"
+      ],
+      "risk": "medium"
+    },
+    {
+      "id": "AC3",
+      "text": "Automated tests cover standard guests, loyalty guests below the cap, and loyalty guests whose discount is capped at 30 percent.",
+      "keywords": [
+        "test",
+        "standard guest",
+        "loyalty",
+        "below cap",
+        "capped"
+      ],
+      "mustTouch": [
+        "test/**",
+        "tests/**",
+        "src/**/*.test.ts"
+      ],
+      "risk": "high"
+    }
+  ],
+  "technicalConstraints": [
+    "Keep discount calculation inside existing pricing or discount service boundaries.",
+    "Do not change booking persistence behavior for this story."
+  ],
+  "securityExpectations": [
+    "Do not log guest personal data, loyalty identifiers, tokens, or full booking payloads."
+  ],
+  "performanceExpectations": [
+    "Price quote calculation should remain in-memory and should not add a new external service call per quote."
+  ],
+  "testExpectations": [
+    "Add focused tests for discount cap behavior.",
+    "Add at least one test proving uncapped discounts still work below the limit."
+  ],
+  "outOfScope": [
+    "payment capture",
+    "reservation cancellation",
+    "refund"
+  ]
+}
