@@ -14,7 +14,12 @@ jobs:
     uses: Sujan-DVSS/ai-context-pr-reviewer/.github/workflows/reusable-review.yml@main
     secrets:
       LITELLM_API_KEY: ${{ secrets.LITELLM_API_KEY }}
+      JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
+      JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+      JIRA_BEARER_TOKEN: ${{ secrets.JIRA_BEARER_TOKEN }}
     with:
+      story-provider: auto
       stories-dir: stories
+      jira-base-url: https://sidekickzen.atlassian.net
       fail-on: high
       llm-provider: auto
