@@ -1,0 +1,23 @@
+{
+  "name": "reviewiq-hotel-booking",
+  "version": "1.0.0",
+  "description": "Dynamic pricing and loyalty discount engine for a hotel booking system",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/server.ts",
+    "demo": "ts-node src/demo.ts",
+    "dev": "ts-node-dev --respawn src/server.ts"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/uuid": "^9.0.0",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
+  }
+}

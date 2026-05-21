@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReviewIQ Grand Hotel — Book Your Stay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ─── Header ─────────────────────────────────────────────────────────── -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-emblem">R</div>
+        <div class="logo-text">
+          <span class="logo-name">ReviewIQ Grand</span>
+          <span class="logo-tagline">Hotels &amp; Resorts</span>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#rooms" class="nav-link">Rooms</a>
+        <a href="#booking" class="nav-link">Book Now</a>
+        <a href="#history" class="nav-link">My Stays</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ─── Hero ───────────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Welcome to Excellence</p>
+      <h1 class="hero-title">Experience Luxury<br /><span class="gold-text">Redefined</span></h1>
+      <p class="hero-sub">
+        Real-time dynamic pricing powered by our AI-driven engine.<br />
+        Loyalty members unlock exclusive seasonal rewards.
+      </p>
+      <div class="hero-actions">
+        <a href="#rooms" class="btn btn-primary">Explore Rooms</a>
+        <a href="#booking" class="btn btn-ghost">Book Direct</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">5</span><span class="stat-label">Room Types</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">3</span><span class="stat-label">Loyalty Tiers</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">4</span><span class="stat-label">Promo Codes</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Loyalty Banner ─────────────────────────────────────────────────── -->
+  <div class="loyalty-banner">
+    <div class="container loyalty-banner-inner">
+      <div class="loyalty-tier">
+        <span class="tier-badge tier-standard">STANDARD</span>
+        <span>Base pricing — no loyalty benefits</span>
+      </div>
+      <div class="loyalty-tier">
+        <span class="tier-badge tier-gold">GOLD</span>
+        <span>10% off during off-peak season</span>
+      </div>
+      <div class="loyalty-tier">
+        <span class="tier-badge tier-platinum">PLATINUM</span>
+        <span>15% off all year round</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Rooms ──────────────────────────────────────────────────────────── -->
+  <section class="section" id="rooms">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our Accommodations</h2>
+        <p class="section-sub">Click a room to begin your reservation</p>
+      </div>
+      <div class="rooms-grid" id="rooms-grid">
+        <!-- Populated by app.js -->
+        <div class="rooms-loading">Loading rooms…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Booking + Pricing ──────────────────────────────────────────────── -->
+  <section class="section section-dark" id="booking">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title light">Reserve Your Room</h2>
+        <p class="section-sub light">Live pricing updates as you adjust your options</p>
+      </div>
+
+      <div class="booking-layout">
+
+        <!-- Booking Form -->
+        <div class="card booking-form-card">
+          <h3 class="card-title">Booking Details</h3>
+
+          <div class="selected-room-banner" id="selected-room-banner">
+            <span class="banner-placeholder">&#9432;&nbsp; No room selected — choose a room above</span>
+          </div>
+
+          <form id="booking-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="check-in">Check-in Date</label>
+                <input class="form-input" type="date" id="check-in" name="checkIn" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="check-out">Check-out Date</label>
+                <input class="form-input" type="date" id="check-out" name="checkOut" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="guest-id">Guest ID</label>
+              <input class="form-input" type="text" id="guest-id" name="guestId"
+                placeholder="e.g. GUEST-001" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="loyalty-tier">Loyalty Tier</label>
+              <select class="form-input form-select" id="loyalty-tier" name="loyaltyTier">
+                <option value="none">Standard Member</option>
+                <option value="gold">&#9733; Gold Member — 10% off-peak discount</option>
+                <option value="platinum">&#9733;&#9733; Platinum Member — 15% year-round</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="promo-code">
+                Promo Code
+                <span class="form-label-hint">optional</span>
+              </label>
+              <input class="form-input" type="text" id="promo-code" name="promoCode"
+                placeholder="e.g. SUMMER20" autocomplete="off" />
+              <p class="form-hint">Try: SUMMER20 · FLASH25 · NEWGUEST15 · LOYALTY10</p>
+            </div>
+
+            <button type="submit" class="btn btn-book" id="book-btn" disabled>
+              Confirm &amp; Book
+            </button>
+          </form>
+        </div>
+
+        <!-- Price Breakdown -->
+        <div class="card pricing-card" id="pricing-card">
+          <h3 class="card-title">Price Breakdown</h3>
+
+          <div class="pricing-placeholder" id="pricing-placeholder">
+            <div class="placeholder-icon">&#128176;</div>
+            <p>Select a room and enter dates<br />to see live pricing</p>
+          </div>
+
+          <div class="pricing-breakdown hidden" id="pricing-breakdown">
+            <div id="season-badge" class="season-badge"></div>
+            <div class="pricing-rows" id="pricing-rows"></div>
+            <div class="pricing-divider"></div>
+            <div class="pricing-total">
+              <span>Total Payable</span>
+              <span class="total-amount" id="total-amount">—</span>
+            </div>
+            <p class="pricing-note" id="pricing-note"></p>
+          </div>
+        </div>
+
+      </div><!-- /booking-layout -->
+    </div>
+  </section>
+
+  <!-- ─── Booking History ────────────────────────────────────────────────── -->
+  <section class="section" id="history">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">My Stays</h2>
+        <p class="section-sub">Look up confirmed bookings by Guest ID</p>
+      </div>
+      <div class="history-search">
+        <input class="form-input history-input" type="text" id="history-guest-id"
+          placeholder="Enter Guest ID (e.g. GUEST-001)" />
+        <button class="btn btn-secondary" id="history-search-btn">Search</button>
+      </div>
+      <div id="history-results"></div>
+    </div>
+  </section>
+
+  <!-- ─── Confirmation Modal ─────────────────────────────────────────────── -->
+  <div class="modal-overlay hidden" id="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modal-close" aria-label="Close">&#10005;</button>
+      <div class="modal-content" id="modal-content"></div>
+    </div>
+  </div>
+
+  <!-- ─── Footer ─────────────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="logo-emblem logo-emblem-sm">R</div>
+        <span class="footer-name">ReviewIQ Grand Hotels &amp; Resorts</span>
+      </div>
+      <p class="footer-copy">&copy; 2026 ReviewIQ Grand. All rights reserved.</p>
+      <p class="footer-copy muted">Powered by the Dynamic Pricing &amp; Loyalty Engine</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
