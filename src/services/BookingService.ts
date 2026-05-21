@@ -77,8 +77,18 @@ export class BookingService {
       );
     }
 
+    // Early bird discount applies when check-in is 30+ days away and no promo
+    // code is active on this booking.
+    // BUG: the !hasPromoCode guard is absent; early bird is applied even when a
+    // promo code is present, allowing both discounts to stack against the rules.
+    const earlyBirdDiscount = this.discountService.calculateEarlyBirdDiscount(
+      context.checkIn,
+      context.bookingDate,
+      priceAfterSeasonal,
+    );
+
     // Combine discount sources and apply the global cap
-    const rawDiscount = loyaltyDiscount + promoDiscount;
+    const rawDiscount = loyaltyDiscount + promoDiscount + earlyBirdDiscount;
     const totalDiscount = this.discountService.enforceDiscountCap(rawDiscount);
 
     const finalPrice = parseFloat(
@@ -91,6 +101,7 @@ export class BookingService {
       priceAfterSeasonal,
       loyaltyDiscount,
       promoDiscount,
+      earlyBirdDiscount,
       totalDiscount,
       finalPrice,
     };
@@ -129,6 +140,8 @@ export class BookingService {
       loyaltyTier,
       hasPromoCode: promoDiscountRate > 0,
       promoDiscountRate,
+      checkIn,
+      bookingDate: new Date(),
     };
 
     // Pricing must be finalised before any payment attempt
