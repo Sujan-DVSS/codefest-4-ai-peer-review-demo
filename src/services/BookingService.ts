@@ -56,16 +56,16 @@ export class BookingService {
 
     const seasonalMultiplier = this.pricingService.getSeasonalMultiplier(season);
 
-    // Loyalty discount is resolved first so we can decide whether to allow a promo.
-    // BUG: discount is calculated on basePrice; should be on priceAfterSeasonal.
+    // Apply the seasonal multiplier to derive the adjusted room rate
+    const priceAfterSeasonal = this.pricingService.applySeasonalPricing(basePrice, season);
+
+    // Loyalty discount is calculated against the season-adjusted price so that
+    // the percentage reflects what the guest is actually being charged.
     const loyaltyDiscount = this.loyaltyService.calculateLoyaltyDiscount(
-      basePrice,         // ← should be the season-adjusted price, not the base
+      priceAfterSeasonal,
       loyaltyTier,
       season,
     );
-
-    // Apply the seasonal multiplier to derive the adjusted room rate
-    const priceAfterSeasonal = this.pricingService.applySeasonalPricing(basePrice, season);
 
     // Promo and loyalty discounts are mutually exclusive — promo is only
     // considered when no loyalty discount is active on this booking.
