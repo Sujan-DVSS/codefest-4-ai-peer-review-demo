@@ -33,10 +33,7 @@ export class LoyaltyService {
 
       case LoyaltyTier.Gold: {
         // Gold members are entitled to a 10% discount during off-peak periods only.
-        // BUG: condition uses !== instead of ===, so the discount is incorrectly
-        // applied during peak season and withheld during off-peak — the opposite
-        // of the intended business rule.
-        if (season !== Season.OffPeak) {
+        if (season === Season.OffPeak) {
           return parseFloat((price * LoyaltyService.GOLD_DISCOUNT_RATE).toFixed(2));
         }
         return 0;
