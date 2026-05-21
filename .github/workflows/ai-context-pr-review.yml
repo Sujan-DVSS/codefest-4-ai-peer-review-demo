@@ -1,0 +1,20 @@
+name: AI Context PR Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  review:
+    uses: Sujan-DVSS/ai-context-pr-reviewer/.github/workflows/reusable-review.yml@main
+    secrets:
+      LITELLM_API_KEY: ${{ secrets.LITELLM_API_KEY }}
+    with:
+      stories-dir: stories
+      fail-on: high
+      llm-provider: auto
