@@ -22,4 +22,5 @@ jobs:
       stories-dir: stories
       jira-base-url: https://sidekickzen.atlassian.net
       fail-on: critical
-      llm-provider: auto
+      llm-provider: litellm
+      llm-required: true
