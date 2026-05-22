@@ -17,6 +17,8 @@ jobs:
       JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}
       JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
       JIRA_BEARER_TOKEN: ${{ secrets.JIRA_BEARER_TOKEN }}
+      REVIEWIQ_APP_ID: ${{ secrets.REVIEWIQ_APP_ID }}
+      REVIEWIQ_APP_PRIVATE_KEY: ${{ secrets.REVIEWIQ_APP_PRIVATE_KEY }}
     with:
       story-provider: auto
       stories-dir: stories
