@@ -44,6 +44,28 @@ export class DiscountService {
   }
 
   /**
+   * Determines whether a booking qualifies for the early bird discount and
+   * returns the dollar saving.
+   *
+   * A booking qualifies when the check-in date is 30 or more days from the
+   * date the booking is made. The discount is 10% of the season-adjusted price.
+   */
+  calculateEarlyBirdDiscount(checkIn: Date, bookingDate: Date, price: number): number {
+    if (price <= 0) return 0;
+
+    const msPerDay = 1000 * 60 * 60 * 24;
+    const daysUntilCheckIn = Math.floor(
+      (checkIn.getTime() - bookingDate.getTime()) / msPerDay,
+    );
+
+    if (daysUntilCheckIn >= 30) {
+      return parseFloat((price * 0.10).toFixed(2));
+    }
+
+    return 0;
+  }
+
+  /**
    * Enforces the $200 maximum discount ceiling across all discount sources.
    * Any combined discount exceeding this threshold must be capped.
    *
@@ -52,10 +74,6 @@ export class DiscountService {
    */
   enforceDiscountCap(discountAmount: number): number {
     const cappedDiscount = Math.min(discountAmount, DiscountService.MAX_DISCOUNT_AMOUNT);
-
-    // BUG: cappedDiscount is computed correctly above, but the uncapped
-    // discountAmount is returned here instead, so the $200 ceiling is never
-    // actually enforced on the final price.
-    return discountAmount;
+    return cappedDiscount;
   }
 }

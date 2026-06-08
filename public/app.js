@@ -169,6 +169,11 @@ function renderPricingBreakdown(season, pricing) {
       <span>Promo discount</span>
       <span>&minus;$${fmt(pricing.promoDiscount)}</span>
     </div>` : ''}
+    ${pricing.earlyBirdDiscount > 0 ? `
+    <div class="pricing-row discount">
+      <span>Early Bird discount (10%)</span>
+      <span>&minus;$${fmt(pricing.earlyBirdDiscount)}</span>
+    </div>` : ''}
     ${nights > 1 ? `
     <div class="pricing-row muted">
       <span>${nights} nights &times; $${fmt(pricing.finalPrice)}</span>
@@ -184,6 +189,8 @@ function renderPricingBreakdown(season, pricing) {
     el.pricingNote().textContent = '✓ Loyalty discount applied. Promo codes are unavailable when a loyalty discount is active.';
   } else if (pricing.promoDiscount > 0) {
     el.pricingNote().textContent = '✓ Promotional discount applied.';
+  } else if (pricing.earlyBirdDiscount > 0) {
+    el.pricingNote().textContent = '✓ Early Bird discount applied — you are booking 30+ days in advance.';
   } else {
     el.pricingNote().textContent = '';
   }

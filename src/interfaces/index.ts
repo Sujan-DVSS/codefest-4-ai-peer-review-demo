@@ -41,6 +41,10 @@ export interface PricingContext {
   hasPromoCode: boolean;
   /** Fractional discount rate from the promo code (e.g. 0.20 for 20%) */
   promoDiscountRate: number;
+  /** Guest's requested check-in date — used for early bird eligibility */
+  checkIn: Date;
+  /** Date the booking was made — used to calculate days until check-in */
+  bookingDate: Date;
 }
 
 export interface PricingBreakdown {
@@ -49,6 +53,8 @@ export interface PricingBreakdown {
   priceAfterSeasonal: number;
   loyaltyDiscount: number;
   promoDiscount: number;
+  /** Dollar saving from the early bird promotion (0 if not applicable) */
+  earlyBirdDiscount: number;
   totalDiscount: number;
   finalPrice: number;
 }

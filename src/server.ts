@@ -62,6 +62,8 @@ app.post('/api/price-preview', (req: Request, res: Response) => {
     loyaltyTier: loyaltyTier as LoyaltyTier,
     hasPromoCode: promoDiscountRate > 0,
     promoDiscountRate,
+    checkIn: checkInDate,
+    bookingDate: new Date(),
   };
 
   try {
